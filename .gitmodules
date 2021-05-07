@@ -1,0 +1,3 @@
+[submodule "awesome/monkeywidgets"]
+	path = awesome/monkeywidgets
+	url = https://github.com/shagu/monkeywidgets
