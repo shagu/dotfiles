@@ -1,0 +1,58 @@
+syntax on
+set number
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set hlsearch
+set nobackup
+set nowritebackup
+set noswapfile
+set foldmarker={{{,}}}
+set foldmethod=marker
+set cursorline
+set foldlevelstart=0
+
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
+
+autocmd BufWritePre * %s/\s\+$//e
+
+set t_Co=256
+set background=dark
+
+"  what?        foreground?     background?   fontstyle?
+hi Normal       ctermfg=253     ctermbg=NONE
+hi NonText      ctermfg=244     ctermbg=NONE
+hi LineNr       ctermfg=8       ctermbg=NONE
+hi StatusLine   ctermfg=253     ctermbg=NONE  cterm=italic
+hi StatusLineNC ctermfg=246     ctermbg=NONE
+hi VertSplit    ctermfg=238     ctermbg=NONE
+hi Folded       ctermfg=248     ctermbg=NONE
+hi Title        ctermfg=254     ctermbg=NONE  cterm=bold
+hi Visual       ctermfg=NONE    ctermbg=236
+hi SpecialKey   ctermfg=244     ctermbg=236
+
+hi CursorLine   ctermbg=234     ctermfg=NONE  cterm=NONE
+hi CursorLineNr ctermfg=12      ctermbg=234   cterm=BOLD
+
+hi Comment      ctermfg=8       ctermbg=NONE
+hi Todo         ctermfg=245     ctermbg=NONE
+hi Boolean      ctermfg=148     ctermbg=NONE
+hi String       ctermfg=148     ctermbg=NONE
+hi Identifier   ctermfg=148     ctermbg=NONE
+hi Function     ctermfg=255     ctermbg=NONE
+hi Type         ctermfg=103     ctermbg=NONE
+hi Statement    ctermfg=103     ctermbg=NONE
+hi Keyword      ctermfg=208     ctermbg=NONE
+hi Constant     ctermfg=208     ctermbg=NONE
+hi Number       ctermfg=208     ctermbg=NONE
+hi Special      ctermfg=208     ctermbg=NONE
+hi PreProc      ctermfg=230     ctermbg=NONE
+
+set wildmenu
+set wildmode=list
