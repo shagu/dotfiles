@@ -1,0 +1,102 @@
+# prompt
+if (( EUID != 0 )); then
+  PS1='\[\033[1;32m\]\u\[\033[0m\]@\h \W \$ '
+else
+  PS1='\[\033[1;31m\]\u\[\033[0m\]@\h \W \$ '
+fi
+
+# environment
+export EDITOR=vim
+export COLORTERM=yes
+export QT_QPA_PLATFORMTHEME=qt5ct
+export STEAM_FRAME_FORCE_CLOSE=1
+
+# disable hidpi
+export GDK_SCALE=1 # gtk
+export GDK_DPI_SCALE=1 # gtk
+export QT_SCALE_FACTOR=1 # qt
+export QT_AUTO_SCREEN_SCALE_FACTOR=0 # qt
+export WINIT_X11_SCALE_FACTOR=1.0 # alacritty
+export WINIT_HIDPI_FACTOR=1.0 # alacritty
+
+# alias
+alias :c=clear
+alias :q=exit
+alias ..="cd .."
+alias ls="ls --color=auto -b"
+alias ll="ls -ll"
+alias mysql="mysql --pager=\"vim -c 'set nowrap' -\""
+
+# alacritty window titles
+case ${TERM} in
+  xterm*|rxvt*|Eterm|aterm|kterm|gnome*|alacritty)
+    PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
+  ;;
+  screen*)
+    PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033_%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
+  ;;
+esac
+
+# utils
+calc() {
+  perl -e "print eval('$@'),\"\n\";"
+}
+
+pwgen() {
+  if [ -z $1 ]; then
+    len=16;
+  else
+    len=$1;
+  fi; < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c $len; echo
+}
+
+clone() {
+  for repeat in {1..${1:-1}}; do
+    (PWD="$(pwd)" $(ps -o 'cmd=' -p $(ps -o 'ppid=' -p $$)) & disown) &> /dev/null
+  done
+}
+
+aur() {
+  if [ "$1" = "-Ss" ]; then
+    wget "https://aur.archlinux.org/packages/?O=0&K=$2" -O /tmp/parse.html &> /dev/null
+    grep "\/packages\/" /tmp/parse.html | grep -v "?K=" | cut -d \> -f 3 | cut -d \< -f 1 | grep "$2" --color=always
+    rm /tmp/parse.html
+  elif [ "$1" = "-S" ]; then
+    mkdir ~/aur &> /dev/null || true
+    cd ~/aur
+    wget https://aur.archlinux.org/cgit/aur.git/snapshot/$2.tar.gz -N &> $2.tar.gz.log
+    tar -xzf $2.tar.gz
+    cd $2
+    makepkg -si
+  fi
+}
+
+mkx265() {
+  ffmpeg -loglevel panic -v 0 -stats -hide_banner -i "$1" -map 0 -c:v libx265 -preset veryfast -crf 18 -c:a aac -strict -2 -b:a 128k "$(basename $1).mkv"
+}
+
+mkx264() {
+  ffmpeg -loglevel panic -v 0 -stats -hide_banner -i "$1" -map 0 -c:v libx264 -preset veryfast -c:a aac -strict -2 -b:a 128k "$(basename $1).mkv"
+}
+
+youtube-m4a() {
+  youtube-dl -xi --embed-thumbnail --add-metadata -f 'bestaudio[ext=m4a]' --download-archive archive.txt $1
+}
+
+record_window() {
+  date=$(date +%Y-%m-%d-%H:%M:%S)
+
+  gst-launch-1.0 ximagesrc xid=$(xwininfo | egrep "Window id:" | sed -e 's/^ *//' | cut -d" " -f4) use-damage=0 ! video/x-raw,framerate=60/1 ! videoconvert ! queue ! avenc_huffyuv ! avimux ! filesink location="record-$date.avi"
+  #gst-launch-1.0 ximagesrc xid=$(xwininfo | egrep "Window id:" | sed -e 's/^ *//' | cut -d" " -f4) use-damage=0 ! video/x-raw,framerate=30/1 ! videoconvert ! queue ! vp9enc ! mux. webmmux name=mux ! filesink location="record-$date.webm"
+}
+
+record_screen() {
+  resolution=$(xdpyinfo| grep dimensions | cut -d " " -f 7)
+  date=$(date +%Y-%m-%d-%H:%M:%S)
+
+  for i in `seq 3`; do echo -n "${i}.. "; sleep 1; done
+  echo "Action!"
+
+  ffmpeg -loglevel panic -s $resolution -framerate 60 -f x11grab -i :0.0 -qscale 0 -vcodec huffyuv ~/record-$date.avi
+  #ffmpeg -loglevel panic -s $resolution -framerate 30 -f x11grab -i :0.0 -c:v libvpx-vp9 ~/record-$date.webm
+}
