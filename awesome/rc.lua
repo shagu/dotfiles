@@ -44,6 +44,8 @@ if awesome.startup_errors then
   })
 end
 
+local display = "eDP"
+
 terminal = "alacritty"
 webbrowser = "chromium"
 filemanager = "thunar"
@@ -53,10 +55,10 @@ screenshot_select = 'scrot -s'
 
 screenshot = [[
   bash -c '
-    xrandr --output eDP --brightness .2;
+    xrandr --output ]]..display..[[ --brightness .2;
     scrot;
     sleep .001;
-    xrandr --output eDP --brightness 1
+    xrandr --output ]]..display..[[ --brightness 1
   '
 ]]
 
@@ -137,7 +139,7 @@ local spacer = wibox.widget {
 
 local mybattery = widgets.battery('BAT1')
 local mybacklight = widgets.backlight('amdgpu_bl0')
-local mynight = widgets.night('eDP')
+local mynight = widgets.night(display)
 local mywifi = widgets.wifi()
 local myvolume = widgets.volume()
 
