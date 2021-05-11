@@ -1,19 +1,18 @@
-
 font:
   normal:
-    family: Envy Code R
+    family: Iosevka
     style: Regular
 
   bold:
-    family: Envy Code R
+    family: Iosevka
     style: Bold
 
   italic:
-    family: Envy Code R
+    family: Iosevka
     style: Italic
 
   bold_italic:
-    family: Envy Code R
+    family: Iosevka
     style: Bold Italic
 
   size: 11
