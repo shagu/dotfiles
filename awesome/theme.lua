@@ -38,9 +38,9 @@ theme.tasklist_plain_task_name = true
 theme.tasklist_spacing = 2
 
 -- titlebars
-theme.titlebar_bg_normal = theme.bg_focus
+theme.titlebar_bg_normal = theme.bg_normal
 theme.titlebar_fg_normal = "#888888"
-theme.titlebar_bg_focus = theme.bg_focus
+theme.titlebar_bg_focus = theme.bg_normal
 theme.titlebar_fg_focus = "#ffffff"
 
 -- menu
