@@ -65,7 +65,7 @@ screenshot = [[
 
 launcher = [[
 rofi -combi-modi run,drun,window,windowcd,ssh -show combi -modi combi -drun-show-actions \
-   -font "Envy Code R 11" -hide-scrollbar -bw 1 -padding 5 \
+   -font "Iosevka 10" -hide-scrollbar -bw 1 -padding 5 \
   -color-window "#181818, #000000, #181818" \
   -color-normal "#242424, #aaaaaa, #242424, #2a2a2a, #8AB4F8" \
   -color-active "#2a2a2a, #ffffff, #242424, #2a2a2a, #8AB4F8" \
