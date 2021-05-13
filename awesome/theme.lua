@@ -9,7 +9,7 @@ local assets = os.getenv("HOME") .. "/.config/awesome/assets/"
 local theme = {}
 
 -- text
-theme.font          = "Cantarell 10"
+theme.font          = "Cantarell 9"
 theme.icon_theme    = nil
 
 -- backgrounds
