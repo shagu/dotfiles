@@ -16,6 +16,7 @@ local menubar = require("menubar")
 
 -- Monkey widgets
 local widgets = require("monkeywidgets")
+widgets.color = "#8AB4F8"
 
 -- Autostart
 local autorun = {
