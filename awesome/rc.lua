@@ -48,7 +48,7 @@ end
 local display = "eDP"
 
 terminal = "alacritty"
-webbrowser = "chromium"
+webbrowser = "firefox"
 filemanager = "thunar"
 ide = "code"
 lockscreen = "i3lock -i " .. beautiful.wallpaper .. " -t -e -f"
@@ -145,7 +145,7 @@ local mywifi = widgets.wifi()
 local myvolume = widgets.volume()
 
 local mytextclock = awful.widget.textclock('<span color="#ffffff"><b>%H</b>:<b>%M</b>:<b>%S</b> </span>', 1)
-mytextclock.forced_width = 60
+mytextclock.forced_width = 55
 local myclock_t = awful.tooltip {
   objects        = { mytextclock },
   timer_function = function()
@@ -296,7 +296,7 @@ awful.screen.connect_for_each_screen(function(s)
     },
   }
 
-  s.mywibox = awful.wibar({ position = "top", height = 28, border_width = 2, border_color = beautiful.bg_normal, screen = s })
+  s.mywibox = awful.wibar({ position = "top", height = 27, border_width = 3, border_color = beautiful.bg_normal, screen = s })
   s.mywibox:setup {
     layout = wibox.layout.align.horizontal,
     { -- left
