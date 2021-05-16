@@ -27,6 +27,24 @@ alias ls="ls --color=auto -b"
 alias ll="ls -ll"
 alias mysql="mysql --pager=\"vim -c 'set nowrap' -\""
 
+# screen window titles
+if [[ "$TERM" == screen* ]]; then
+  preexec_invoke_exec () {
+    [ -n "$COMP_LINE" ] && return  # do nothing if completing
+    [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return # don't cause a preexec for $PROMPT_COMMAND
+
+    if [[ "$BASH_COMMAND" != printf* ]] && [[ "$BASH_COMMAND" != basename* ]]; then
+      app="$(basename $BASH_COMMAND)"
+      printf '\ek%s\e\\' "[$app]"
+    else
+      pwd="~${PWD#$HOME}"
+      printf '\ek%s\e\\' "$pwd"
+    fi
+  }
+
+  trap 'preexec_invoke_exec' DEBUG
+fi
+
 # alacritty window titles
 case ${TERM} in
   xterm*|rxvt*|Eterm|aterm|kterm|gnome*|alacritty)
