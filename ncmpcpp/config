@@ -1,0 +1,29 @@
+now_playing_prefix = "$b$3►"
+now_playing_suffix = "$3$/b"
+
+progressbar_look = "━>─"
+progressbar_elapsed_color = "green"
+
+empty_tag_marker="[!]"
+song_columns_list_format = "(2)[]{} (12)[blue]{a} (80)[white]{f} (6)[yellow]{l}"
+
+display_bitrate = "yes"
+autocenter_mode = "yes"
+centered_cursor = "no"
+
+statusbar_visibility = "yes"
+header_visibility = "yes"
+titles_visibility = "no"
+
+mouse_support = "no"
+ask_before_clearing_playlists = "no"
+
+# Colors
+# 0:default 1:black 2:red 3:green 4:yellow 5:blue 6:magenta 7:cyan 7:white 9:grey
+colors_enabled = "yes"
+header_window_color = 7
+statusbar_color = 7
+state_flags_color = 3
+state_line_color =  9
+progressbar_color = 9
+main_window_color = 9
