@@ -42,6 +42,10 @@ calc() {
   perl -e "print eval('$@'),\"\n\";"
 }
 
+wwwman() {
+  curl -skL "$*" | pandoc -s -f html -t man | man -l -
+}
+
 pwgen() {
   if [ -z $1 ]; then
     len=16;
