@@ -45,7 +45,14 @@ if awesome.startup_errors then
   })
 end
 
-local display = "eDP"
+-- Host specific settings
+hostname = io.popen("uname -n"):read()
+if hostname == "loki" then
+  notebook = true
+  display = "eDP"
+else
+  display = "HDMI-A-0"
+end
 
 terminal = "alacritty"
 webbrowser = "firefox"
@@ -313,25 +320,33 @@ awful.screen.connect_for_each_screen(function(s)
     },
     { -- right
       layout = wibox.layout.fixed.horizontal,
-      mywifi.icon,
-      mywifi,
-      spacer,
-      mybattery.icon,
-      mybattery,
-      spacer,
+
+      notebook and mywifi.icon,
+      notebook and mywifi,
+      notebook and spacer,
+
+      notebook and mybattery.icon,
+      notebook and mybattery,
+      notebook and spacer,
+
       mynight.icon,
       mynight,
-      space,
-      mybacklight.icon,
-      mybacklight,
       spacer,
+
+      notebook and mybacklight.icon,
+      notebook and mybacklight,
+      notebook and spacer,
+
       myvolume.icon,
       myvolume,
       spacer,
+
       mymarginsystray,
       spacer,
+
       mytextclock,
       spacer,
+
       myminimizebutton,
       mymaximizebutton,
       myclosebutton,
