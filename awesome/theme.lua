@@ -10,7 +10,8 @@ local theme = {}
 
 -- text
 theme.font          = "Cantarell 9"
-theme.icon_theme    = nil
+theme.font_title    = "Cantarell Bold 9"
+theme.icon_theme    = "Breeze Dark"
 
 -- backgrounds
 theme.bg_normal     = "#1a1a1a"
@@ -20,15 +21,15 @@ theme.bg_minimize   = theme.bg_normal
 theme.bg_systray    = theme.bg_normal
 
 -- foregrounds
-theme.fg_normal     = "#aaaaaa"
+theme.fg_normal     = "#888888"
 theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
 -- borders
-theme.border_width      = 1
+theme.border_width      = 2
 theme.border_normal     = "#1a1a1a"
-theme.border_focus      = "#686868"
+theme.border_focus      = "#1a1a1a"
 theme.border_marked     = "#4A89C7"
 theme.useless_gap       = 5
 theme.gap_single_client = false

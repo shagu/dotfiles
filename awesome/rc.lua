@@ -16,13 +16,15 @@ local menubar = require("menubar")
 
 -- Monkey widgets
 local widgets = require("monkeywidgets")
-widgets.color = "#8AB4F8"
+widgets.color = "#88cc88"
 
 -- Autostart
 local autorun = {
   "xset s off",
   "xset -dpms",
   "xsetroot -cursor_name left_ptr",
+  "bash -c 'pgrep -x picom || picom'",
+  "bash -c 'pgrep -x conky || conky'",
 }
 
 for id, command in pairs(autorun) do
@@ -88,11 +90,11 @@ modkey = "Mod1"
 appkey = "Mod4"
 
 awful.layout.layouts = {
+  awful.layout.suit.floating,
   awful.layout.suit.tile,
   awful.layout.suit.tile.bottom,
   awful.layout.suit.corner.nw,
   awful.layout.suit.fair,
-  awful.layout.suit.floating,
 }
 
 mymainmenu = awful.menu({
@@ -245,7 +247,7 @@ awful.keygrabber {
 
 awful.screen.connect_for_each_screen(function(s)
   gears.wallpaper.tiled(beautiful.wallpaper, s)
-  awful.tag({ "❶", "❷", "❸", "❹" }, s, awful.layout.layouts[1])
+  awful.tag({ " ❶ ", " ❷ ", " ❸ ", " ❹ " }, s, awful.layout.layouts[1])
 
   s.mypromptbox = awful.widget.prompt()
   s.mylayoutbox = awful.widget.layoutbox(s)
@@ -262,7 +264,8 @@ awful.screen.connect_for_each_screen(function(s)
     screen = s,
     filter = awful.widget.taglist.filter.all,
     style = {
-      spacing = 2,
+      font = 'Cantarell 12',
+      spacing = 0,
       shape  = gears.shape.rectangle,
     },
     buttons = taglist_buttons,
@@ -303,7 +306,7 @@ awful.screen.connect_for_each_screen(function(s)
     },
   }
 
-  s.mywibox = awful.wibar({ position = "top", height = 27, border_width = 3, border_color = beautiful.bg_normal, screen = s })
+  s.mywibox = awful.wibar({ position = "top", height = 28, border_width = 2, border_color = beautiful.bg_normal, screen = s })
   s.mywibox:setup {
     layout = wibox.layout.align.horizontal,
     { -- left
@@ -489,7 +492,7 @@ awful.rules.rules = {
 
   {
     rule_any = {type = { "normal", "dialog" }},
-    properties = { titlebars_enabled = true }
+    properties = { TItlebars_enabled = false }
   },
 }
 
@@ -503,6 +506,14 @@ local function decide_border(c)
     elseif not c.floating and #c.screen.clients == 1 then
       border = nil
       title = nil
+    end
+
+    if border and title and not c.round_corner then
+      c.shape = gears.shape.rounded_rect
+      c.round_corner = true
+    elseif not border and not title and c.round_corner then
+      c.shape = gears.shape.rectangle
+      c.round_corner = nil
     end
 
     c.border_width = border and beautiful.border_width or 0
@@ -613,7 +624,7 @@ client.connect_signal("request::titlebars", function(c)
   )
 
   -- disable titlebars
-  awful.titlebar(c, { position = "top", --[[size = 30]] }) : setup {
+  awful.titlebar(c, { position = "top", size = 28 }) : setup {
     layout = wibox.layout.align.horizontal,
     { -- left
     layout  = wibox.layout.fixed.horizontal,
@@ -624,6 +635,7 @@ client.connect_signal("request::titlebars", function(c)
       {
         align  = "center",
         widget = titlebarcaption,
+        font = beautiful.font_title,
       },
       buttons = buttons
     },
