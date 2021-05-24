@@ -508,6 +508,7 @@ local function decide_border(c)
       title = nil
     end
 
+    --[[ rounded window decorations
     if border and title and not c.round_corner then
       c.shape = gears.shape.rounded_rect
       c.round_corner = true
@@ -515,6 +516,7 @@ local function decide_border(c)
       c.shape = gears.shape.rectangle
       c.round_corner = nil
     end
+    ]]--
 
     c.border_width = border and beautiful.border_width or 0
 
