@@ -28,10 +28,10 @@ theme.fg_minimize   = "#ffffff"
 
 -- borders
 theme.border_width      = 2
-theme.border_normal     = "#1a1a1a"
-theme.border_focus      = "#1a1a1a"
+theme.border_normal     = "#000000"
+theme.border_focus      = "#000000"
 theme.border_marked     = "#4A89C7"
-theme.useless_gap       = 5
+theme.useless_gap       = 0
 theme.gap_single_client = false
 
 -- tasklist
@@ -43,6 +43,11 @@ theme.titlebar_bg_normal = theme.bg_normal
 theme.titlebar_fg_normal = "#888888"
 theme.titlebar_bg_focus = theme.bg_normal
 theme.titlebar_fg_focus = "#ffffff"
+theme.titlebar_bg_focus = { type = "linear",
+                            from = { 0, 0 },
+                            to = { 0, 1 },
+                            stops = { { 0, "#E59C19" }, { 1, theme.titlebar_bg_normal } }
+                          }
 
 -- menu
 theme.menu_height = dpi(25)
@@ -55,22 +60,18 @@ theme.systray_icon_spacing = 8
 theme.menu_submenu_icon = assets .. "maximized_normal_inactive.png"
 
 -- assets: titlebars
-theme.titlebar_close_button_normal = assets .. "close_normal.png"
-theme.titlebar_close_button_focus  = assets .. "close_focus.png"
-theme.titlebar_maximized_button_normal_inactive = assets .. "maximized_normal_inactive.png"
-theme.titlebar_maximized_button_focus_inactive  = assets .. "maximized_focus_inactive.png"
-theme.titlebar_maximized_button_normal_active = assets .. "maximized_normal_active.png"
-theme.titlebar_maximized_button_focus_active  = assets .. "maximized_focus_active.png"
-theme.titlebar_floating_button_normal_inactive = assets .. "floating_normal_inactive.png"
+theme.titlebar_close_button_normal = assets .. "close.png"
+theme.titlebar_close_button_focus  = assets .. "close.png"
+theme.titlebar_maximized_button_normal_inactive = assets .. "maximize.png"
+theme.titlebar_maximized_button_focus_inactive  = assets .. "maximize.png"
+theme.titlebar_maximized_button_normal_active = assets .. "maximize.png"
+theme.titlebar_maximized_button_focus_active  = assets .. "maximize.png"
+theme.titlebar_floating_button_normal_inactive = assets .. "floating_focus_inactive.png"
 theme.titlebar_floating_button_focus_inactive  = assets .. "floating_focus_inactive.png"
-theme.titlebar_floating_button_normal_active = assets .. "floating_normal_active.png"
+theme.titlebar_floating_button_normal_active = assets .. "floating_focus_active.png"
 theme.titlebar_floating_button_focus_active  = assets .. "floating_focus_active.png"
-theme.titlebar_minimize_button_normal = assets .. "minimized_normal.png"
-theme.titlebar_minimize_button_focus  = assets .. "minimized_focus.png"
-theme.titlebar_sticky_button_normal_inactive = assets .. "sticky_normal_inactive.png"
-theme.titlebar_sticky_button_focus_inactive  = assets .. "sticky_focus_inactive.png"
-theme.titlebar_sticky_button_normal_active = assets .. "sticky_normal_active.png"
-theme.titlebar_sticky_button_focus_active  = assets .. "sticky_focus_active.png"
+theme.titlebar_minimize_button_normal = assets .. "minimize.png"
+theme.titlebar_minimize_button_focus  = assets .. "minimize.png"
 
 -- assets: layouts
 theme.layout_tile = assets .. "tilew.png"
