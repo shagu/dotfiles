@@ -44,7 +44,7 @@ screenshot = 'scrot'
 screenshot_select = 'scrot -s'
 
 launcher = [[
-rofi -combi-modi run,drun,window,windowcd,ssh -show combi -modi combi -drun-show-actions \
+rofi -combi-modi window,windowcd,run,drun,ssh -show combi -modi combi -drun-show-actions \
    -font "Iosevka 10" -hide-scrollbar -bw 1 -padding 5 \
   -color-window "#181818, #000000, #181818" \
   -color-normal "#242424, #aaaaaa, #242424, #2a2a2a, #E59C19" \
