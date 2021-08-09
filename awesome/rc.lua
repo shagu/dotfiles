@@ -74,7 +74,7 @@ table.insert(autorun, "xsetroot -def") -- reset X defaults
 table.insert(autorun, "xset s off") -- disable X screensaver
 table.insert(autorun, "xset -dpms") -- disable X powersaving
 table.insert(autorun, "xsetroot -cursor_name left_ptr")
-table.insert(autorun, "xcape -e 'Super_L=Super_L|0'")
+table.insert(autorun, [[ bash -c "pgrep -x xcape || xcape -e 'Super_L=Super_L|0'" ]])
 table.insert(autorun, "nitrogen --restore")
 
 for id, command in pairs(autorun) do
